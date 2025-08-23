@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>아이디어 공모전</title>
+
+  <!-- 폰트: Pretendard Variable (가변) -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+  <link rel="stylesheet" href="footer-style.css">
+  <link rel="icon" href="/uniquers/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="favicon.png"> <!-- iOS 홈화면용 -->
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <meta property="og:site_name" content="UNIQUERS 2025">
+  <meta property="og:locale" content="ko_KR">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://2horang2.github.io/uniquers/">
+  <meta property="og:title" content="2025 UNIQUERS">
+  <meta property="og:description" content="디지털·제휴 신사업 아이디어 공모전">
+  <meta property="og:image" content="https://2horang2.github.io/uniquers/shb.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://2horang2.github.io/uniquers/">
+  <meta name="twitter:title" content="2025 UNIQUERS ">
+  <meta name="twitter:description" content="디지털·제휴 신사업 아이디어 공모전">
+  <meta name="twitter:image" content="https://2horang2.github.io/uniquers/shb.png">
+  
+  <style>
+    :root{
+      --bg:#0b0f1a; --card:#ffffff; --ink:#0f172a; --white:#fff;
+      --text:#0e1116; --muted:#6b7684; --line:#e6e9ef;
+      --primary:#0046ff; --primary-2:#2f6bff; --ring:rgba(0,70,255,.18);
+      --grad-1:linear-gradient(180deg,#061028 0%,#0a1a3a 60%,#0c1024 100%);
+      --grad-2:radial-gradient(1200px 600px at 10% -10%, rgba(0,70,255,.35), transparent 60%),
+                radial-gradient(1000px 600px at 90% 0%, rgba(0,180,255,.25), transparent 60%);
+    }
+
+    /* 전역 폰트 고정 */
+    #shb-index, #shb-index *{
+      font-family:"Pretendard Variable","Pretendard",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",Roboto,Arial,"Malgun Gothic","맑은 고딕",sans-serif!important;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility;
+    }
+
+    /* 헤딩 공통 */
+    #shb-index h1, #shb-index h2, #shb-index h3, #shb-index h4, #shb-index h5, #shb-index h6{
+      margin:0; font-weight:800; letter-spacing:-.02em; line-height:1.25; color:#101828;
+    }
+
+    *{box-sizing:border-box}
+    #shb-index{margin:0; font-size:15px; line-height:1.7; color:var(--text); background:#fff;}
+    #shb-index a{text-decoration:none; color:inherit}
+    .container{max-width:1200px; margin:0 auto; padding:0 24px}
+
+    /* ===== main ===== */
+    .hero{position:relative; background:var(--grad-1); color:#cbd5e1}
+    .hero::before{content:""; position:absolute; inset:0; background:var(--grad-2); pointer-events:none}
+    .hero-inner{
+      position:relative; z-index:1;
+      padding:84px 0 72px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:48px;
+    }
+    .hero-left{flex:1 1 50%; min-width:0; display:flex; justify-content:center}
+    .hero-left img{
+      display:block; width:100%; max-width:520px; height:auto; border-radius:16px;
+      box-shadow:0 24px 60px rgba(0,0,0,.28);
+    }
+    .hero-right{flex:1 1 50%; min-width:0; color:#e6eefc}
+    .h-eyebrow{
+      display:inline-flex; gap:8px; align-items:center; padding:8px 12px;
+      border-radius:999px; background:rgba(255,255,255,.10); color:#a9c4ff;
+      font-weight:700; border:1px solid rgba(255,255,255,.16); letter-spacing:.02em;
+      margin-bottom:12px;
+    }
+    .h-title{
+      font-size:clamp(32px,4.4vw,48px); line-height:1.18; color:#fff;
+      margin:0 0 10px;
+    }
+    .h-desc{color:#bcd0ee; margin:0 0 20px; letter-spacing:-.01em}
+
+    /* Hero 카드 버튼 (클릭 이동) */
+    .hero-actions{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:8px}
+    .hero-card{
+      display:block; padding:18px 16px; border-radius:14px;
+      background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18);
+      color:#fff; transition:.22s ease; box-shadow:0 10px 22px rgba(0,0,0,.18);
+    }
+    .hero-card:hover{background:rgba(255,255,255,.14); transform:translateY(-2px)}
+    .hero-card b{display:block; font-size:18px; margin-bottom:4px}
+    .hero-card small{opacity:.8}
+
+    /* ===== 모바일 패딩 ===== */
+    @media (max-width:960px){
+      .container{
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
+      }
+      .hero{ padding-top: max(0px, env(safe-area-inset-top)); }
+      .hero-inner{flex-direction:column; padding:72px 0 56px}
+      .hero-left img{border-radius:14px; max-width:420px}
+      .hero-actions{grid-template-columns:1fr}
+      .hero-right{text-align:center}
+    }
+
+    /* ===== 공통 섹션 ===== */
+    .section{padding:60px 0}
+    .sec-title{font-size:clamp(18px,2vw,22px);}
+    .sec-desc{color:var(--muted); margin:8px 0 20px; letter-spacing:-.005em}
+    .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
+    @media (max-width:960px){.grid-2{grid-template-columns:1fr}}
+
+    /* 카드 */
+    .feature-card{
+      background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px;
+      box-shadow:0 10px 24px rgba(6,16,40,.06);
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .feature-card:hover{transform:translateY(-2px); border-color:#d7dfee; box-shadow:0 14px 32px rgba(6,16,40,.10)}
+    .fc-head{display:flex; align-items:center; gap:12px; margin-bottom:10px}
+    .fc-icon{width:34px; height:34px; border-radius:10px; flex:none; background:linear-gradient(135deg,#f3f7ff,#e8f0ff); border:1px solid #e7ecf5; display:grid; place-items:center; font-weight:800; color:var(--primary)}
+    .feature-card h3{font-size:clamp(18px,1.6vw,22px); font-weight:800; letter-spacing:-.02em; line-height:1.35; color:#101828; margin:0; transition:color .2s}
+    .feature-card:hover h3{color:var(--primary)}
+    .fc-desc{margin:8px 0 14px; color:#475569; line-height:1.7; letter-spacing:.003em}
+
+    /* 버튼 */
+    .row-cta{display:flex; gap:8px; flex-wrap:wrap}
+    .btn{display:inline-flex; align-items:center; gap:6px; border-radius:12px; padding:9px 12px; font-weight:700; letter-spacing:-.01em; cursor:pointer; transition:.18s ease; border:1px solid var(--line); font-size:14px}
+    .btn .arr{display:inline-block; transform:translateX(0); transition:transform .18s}
+    .btn:hover .arr{transform:translateX(2px)}
+    .btn.solid{background:linear-gradient(90deg,var(--primary),var(--primary-2)); border:none; color:#fff !important}
+    .btn.ghost-blue{background:#fff; color:var(--primary) !important; border:1px solid #d7e3ff}
+
+    /* ===== Awards (기존 레이아웃 유지) ===== */
+    .awards{background:#f7f9ff; border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+    .awards .wrap{display:grid; grid-template-columns:1.2fr .8fr; gap:20px; align-items:start}
+    @media (max-width:960px){.awards .wrap{grid-template-columns:1fr}}
+    .aw2-left{display:grid; gap:14px}
+    .aw2-benefit{
+      display:flex; align-items:flex-start; gap:14px;
+      background:linear-gradient(0deg, rgba(47,107,255,.06), rgba(47,107,255,.06)), #fff;
+      border:1px solid #d7e3ff; border-radius:18px; padding:16px 18px;
+      box-shadow:0 10px 22px rgba(6,16,40,.06);
+    }
+    .aw2-b-icon{
+      width:46px;height:46px;border-radius:14px;display:grid;place-items:center;flex:none;
+      background:linear-gradient(135deg,#eef2ff,#e3ecff);border:1px solid #dae5ff
+    }
+    .aw2-b-icon svg{width:26px;height:26px}
+    .aw2-b-list{margin:0;padding:0;list-style:none;color:#0f172a;font-weight:800}
+    .aw2-b-list li{position:relative;padding-left:14px;margin:6px 0}
+    .aw2-b-list li::before{content:"•";position:absolute;left:0;top:0;color:#2f6bff}
+    .aw2-prizes{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .aw2-prize{
+      background:#fff;border:1px solid #e6ecfb;border-radius:16px;padding:14px;
+      box-shadow:0 8px 20px rgba(6,16,40,.06);transition:.18s ease;
+    }
+    .aw2-prize:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(6,16,40,.10)}
+    .aw2-top{display:flex;align-items:center;gap:10px}
+    .aw2-coin{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none}
+    .aw2-amt{margin-top:6px;color:#0f172a;font-weight:800}
+    .coin-gold{background:linear-gradient(135deg,#ffeeb1,#ffd56d)}
+    .coin-silver{background:linear-gradient(135deg,#eff4ff,#d7e2ff)}
+    .coin-slate{background:linear-gradient(135deg,#eef2f6,#dde5ee)}
+    .coin-bronze{background:linear-gradient(135deg,#f2eae2,#e0d6ca)}
+    .award-media{
+      position:relative;border-radius:16px;overflow:hidden;border:1px solid #e6ecfb;background:#000;
+      box-shadow:0 10px 24px rgba(6,16,40,.06)
+    }
+    .award-media video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+
+    /* ===== Schedule(진행 일정·라이트) ===== */
+    .schedule{background:#fff; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+    .schedule .container{padding-top:72px; padding-bottom:68px;}
+    .schedule .sec-title{margin-bottom:22px !important;}
+    .sch-card{background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:0 10px 24px rgba(6,16,40,.06); padding:18px 20px;}
+    .sch-table{margin:4px 0 0; border-top:1px solid var(--line);}
+    .sch-row{display:grid; grid-template-columns:180px 1fr; gap:24px; padding:14px 0; border-bottom:1px solid var(--line);}
+    .sch-row:last-child{border-bottom:none}
+    .sch-label{color:#334155; font-weight:800;}
+    .sch-value{color:#0e1116;}
+    .sch-note{margin-top:12px; color:#6b7684; font-size:14px}
+    .sch-cta{
+      margin-top:14px; display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:16px 18px; border-radius:14px; background:linear-gradient(0deg, rgba(47,107,255,.06), rgba(47,107,255,.06)), #fff; border:1px solid #d7e3ff;
+    }
+    .sch-cta h4{margin:0 0 4px; font-size:16px; color:#0f172a}
+    .sch-cta a{display:inline-flex; align-items:center; gap:6px; font-weight:700; color:var(--primary)}
+    .sch-cta a:hover{opacity:.9}
+    .sch-arrow{font-size:24px; line-height:1}
+    @media (max-width:960px){ .sch-row{grid-template-columns:1fr; gap:6px} }
+
+    /* ===== 참가 방법: 일정 테이블과 완전 통일 ===== */
+    .howto{background:#fff; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+    .howto .container{padding-top:72px; padding-bottom:68px;}
+    .howto .sec-title{margin-bottom:22px !important;}
+    .ht-card{background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:0 10px 24px rgba(6,16,40,.06); padding:18px 20px;}
+    .ht-table{margin:4px 0 0; border-top:1px solid var(--line);}
+    .ht-row{display:grid; grid-template-columns:180px 1fr; gap:24px; padding:14px 0; border-bottom:1px solid var(--line);}
+    .ht-row:last-child{border-bottom:none}
+    .ht-label{color:#334155; font-weight:800;}
+    .ht-value{color:#0e1116;}
+    .ht-note{
+      margin-top:14px; display:flex; align-items:center; gap:10px; padding:16px 18px;
+      border-radius:14px; background:linear-gradient(0deg, rgba(47,107,255,.06), rgba(47,107,255,.06)), #fff; border:1px solid #d7e3ff;
+    }
+    .ht-note p{margin:0; color:#0f172a; font-weight:700;}
+    @media (max-width:960px){ .ht-row{grid-template-columns:1fr; gap:6px} }
+
+    /* FAQ */
+    .faq{background:#fafbff; border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+    .acc{border:1px solid var(--line); border-radius:14px; background:#fff; overflow:hidden}
+    .acc + .acc{margin-top:10px}
+    .acc-sum{list-style:none; margin:0; padding:14px 16px; cursor:pointer; font-weight:700; display:flex; justify-content:space-between; align-items:center}
+    .acc-sum:after{content:"+"; font-weight:800; color:#6b7684}
+    .acc[open] .acc-sum:after{content:"–"}
+    .acc-d{padding:0 16px 16px; color:#475569}
+
+    /* HERO 타이틀 흰색 강제 */
+    #shb-index .hero .h-title { color:#fff !important; }
+
+    /* 섹션 간격 정책 */
+    .awards .sec-title{ margin-bottom:28px !important; }
+    .awards .container{ padding-top:72px; padding-bottom:68px; }
+    .faq .sec-title{ margin-bottom:24px !important; }
+    .faq .container{ padding-top:72px; padding-bottom:68px; }
+    @media (max-width:960px){
+      .awards .sec-title{ margin-bottom:22px !important; }
+      .awards .container{ padding-top:60px; padding-bottom:60px; }
+      .faq .sec-title{ margin-bottom:20px !important; }
+      .faq .container{ padding-top:60px; padding-bottom:60px; }
+    }
+
+    /* ===== Mobile fine-tuning for HERO (<=480px) ===== */
+    @media (max-width:480px){
+      .hero-inner{ padding: 40px 0 32px; gap: 24px; }
+      .hero-left img{ max-width: 320px; max-height: 200px; aspect-ratio: 16 / 10; object-fit: contain; border-radius: 12px; }
+      .h-title{ font-size: clamp(24px, 7vw, 32px); margin-bottom: 8px; }
+      .h-desc{ font-size: 14px; margin-bottom: 14px; }
+      .hero-actions{ grid-template-columns: repeat(2, 1fr) !important; gap: 12px; }
+      .hero-right{ text-align: left; padding-inline: 8px; }
+      .container{ padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+    }
+
+    /* coin svg size */
+    .aw2-coin svg{width:22px;height:22px}
+
+    /* === Back to Top (index 전용) === */
+    #backToTop {
+        position: fixed;
+        right: max(50px, env(safe-area-inset-right));
+        bottom: max(50px, calc(env(safe-area-inset-bottom) + 50px));
+        z-index: 9999;
+        width: 44px; height: 44px;
+        border: none; border-radius: 999px;
+        background: linear-gradient(90deg, #676767, #ababab);
+        color: #fff; display: grid; place-items: center;
+        box-shadow: 0 10px 24px rgba(0,0,0,.18);
+        cursor: pointer; opacity: 0; transform: translateY(10px);
+        pointer-events: none; transition: opacity .2s ease, transform .2s ease;
+    }
+    #backToTop.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    #backToTop:focus { outline: none; box-shadow: 0 0 0 4px rgba(0,70,255,.25); }
+    #backToTop svg { width: 20px; height: 20px; }
+
+    /* 더 큰 화면에서 살짝 키우기 */
+    @media (min-width: 960px){
+    #backToTop { width: 50px; height: 50px; }
+    #backToTop svg { width: 22px; height: 22px; }
+    }
+
+    /* 모션 최소화 선호 시 애니메이션 제거 */
+    @media (prefers-reduced-motion: reduce){
+    #backToTop { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div id="shb-index">
+
+    <!-- ===== main ===== -->
+    <section class="hero" id="intro">
+      <div class="container hero-inner">
+        <div class="hero-left">
+          <img src="https://raw.githubusercontent.com/2horang2/cat-chat/main/shb-idea.png" alt="">
+        </div>
+        <div class="hero-right">
+          <span class="h-eyebrow">아이디어 X 실행력</span>
+          <h1 class="h-title">2025 UNIQUERS</h1>
+          <p class="h-desc">여러분이 상상하던 제휴 · 디지털과 관련된 모든 것을 공유해주세요.</p>
+          <div class="hero-actions">
+            <a class="hero-card" href="submit"><b>아이디어 접수</b><small>로그인 없이 자유롭게 작성하세요🐳</small></a>
+            <a class="hero-card" href="inquiry"><b>접수이력 조회</b><small>접수번호와 행번으로 확인하세요</small></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 진행 중 / 카드 섹션 -->
+    <section class="section" id="running">
+      <div class="container">
+        <h2 class="sec-title">지금 진행 중</h2>
+        <p class="sec-desc">공모주제와 가이드를 확인해보세요! UNIQUERS 2025 사이트 혹은 유니커즈 스윙메일로 접수가능합니다.</p>
+
+        <div class="grid-2">
+          <article class="feature-card">
+            <header class="fc-head">
+              <div class="fc-icon">1</div>
+              <h3 style="color: #e60026;">⭐제휴 신사업</h3>
+            </header>
+            <p class="fc-desc">사심가득하고 자유로운 제휴아이디어를 환영합니다!</p>
+            <div class="row-cta">
+              <a class="btn solid" href="https://m.site.naver.com/1P2gY" target="_blank" >#제휴 가이드 보러가기<span class="arr">→</span></a>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <header class="fc-head">
+              <div class="fc-icon">2</div>
+              <h3 >디지털 신사업</h3>
+            </header>
+            <p class="fc-desc">새로운 경험을 줄 디지털신사업을 기다립니다!</p>
+            <div class="row-cta">
+              <a class="btn solid" href="https://m.site.naver.com/1P2gF" target="_blank">#디지털 가이드 보러가기<span class="arr">→</span></a>
+            </div>
+          </article>
+        </div>
+
+        <div class="grid-2" style="margin-top:16px">
+          <article class="feature-card">
+            <header class="fc-head">
+              <div class="fc-icon">🎁</div>
+              <h3>공모전 상세내용</h3>
+            </header>
+            <p class="fc-desc">심사 절차, 일정, 혜택을 확인하세요.</p>
+            <div class="row-cta">
+              <a class="btn ghost-blue" href="#awards">포상·혜택<span class="arr">→</span></a>
+              <a class="btn ghost-blue" href="#schedule">일정 <span class="arr">→</span></a>
+              <a class="btn ghost-blue" href="#faq">FAQ <span class="arr">→</span></a>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <header class="fc-head">
+              <div class="fc-icon">✏️</div>
+              <h3>아이디어 접수</h3>
+            </header>
+            <p class="fc-desc">아이디어 주제·제안배경·상세내용·기대효과</p>
+            <div class="row-cta">
+              <a class="btn solid" href="submit">제출 바로가기 <span class="arr">→</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 수상 혜택 (좌: 혜택+2×2 / 우: 영상) ===== -->
+    <section class="section awards" id="awards">
+      <div class="container">
+        <h2 class="sec-title">수상 혜택</h2>
+
+        <div class="wrap">
+          <div class="aw2-left">
+            <div class="aw2-benefit">
+ 
+              <ul class="aw2-b-list">
+                <li>대상·최우수·우수·장려 포상 (총 5팀, 약 900만원 상당 상품)</li>
+                <li>2025 SDCX DAY 전시 및 시상 (10/31)</li>
+              </ul>
+            </div>
+
+            <div class="aw2-prizes">
+              <!-- 대상 -->
+              <article class="aw2-prize">
+                <div class="aw2-top">
+
+                  <div class="aw2-amt">대상(인당/1팀)</div>
+                </div>
+                <div class="aw2-name">아이폰16Pro + 애플워치SE2 세트</div>
+              </article>
+
+              <!-- 최우수상 -->
+              <article class="aw2-prize">
+                <div class="aw2-top">
+
+                  	<div class="aw2-amt">최우수상(인당/1팀)</div>
+				  </div>
+                
+                <div class="aw2-name">아이폰16Pro or 갤럭시S25</div>
+              </article>
+
+              <!-- 우수상 -->
+              <article class="aw2-prize">
+                <div class="aw2-top">
+
+                  <div class="aw2-amt">우수상(인당/1팀)</div>
+                </div>
+                <div class="aw2-name">마샬 스피커 앤톤3</div>
+              </article>
+
+              <!-- 장려상 -->
+              <article class="aw2-prize">
+                <div class="aw2-top">
+ 
+                  <div class="aw2-amt">장려상(인당/2팀)</div>
+                </div>
+                <div class="aw2-name">에어팟 or 갤럭시버즈</div>
+              </article>
+            </div>
+          </div>
+
+          <!-- 우측: 영상 -->
+          <div class="award-media">
+            <video autoplay loop muted playsinline preload="metadata"
+                   poster="https://raw.githubusercontent.com/2horang2/cat-chat/main/shb-idea-video2.mp4">
+              <source src="https://raw.githubusercontent.com/2horang2/cat-chat/main/shb-idea-video2.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 참가 방법 (일정과 동일한 표 스타일) ===== -->
+    <section class="section howto" id="howto">
+      <div class="container">
+        <h2 class="sec-title">참가 방법</h2>
+
+        <div class="ht-table">
+          <div class="ht-row">
+            <div class="ht-label">자격</div>
+            <div class="ht-value">신한은행 임직원 누구나</div>
+          </div>
+          <div class="ht-row">
+            <div class="ht-label">팀 구성</div>
+            <div class="ht-value">1~2인, 타 부서/타 직무 조합 환영</div>
+          </div>
+          <div class="ht-row">
+            <div class="ht-label">신청 방법</div>
+            <div class="ht-value">해당 신청페이지 접수 또는 유니커즈 스윙메일 접수</div>
+          </div>
+		  <div class="sch-cta">
+			<div>
+			  <b>중복 참가 가능👌</b><br>다작상 경품도 있으니 자유롭게! 사심 가득한 아이디어도 환영합니다😊
+			</div>
+		  </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 진행 일정 (라이트 테마) -->
+    <section class="section schedule" id="schedule">
+      <div class="container">
+        <h2 class="sec-title">진행 일정</h2>
+
+        <div class="sch-table">
+          <div class="sch-row">
+            <div class="sch-label">접수 기간</div>
+            <div class="sch-value">2025년 9월 1일 ~ 9월 21일</div>
+          </div>
+          <div class="sch-row">
+            <div class="sch-label">심사 기간</div>
+            <div class="sch-value">2025년 9월 22일 ~ 9월 30일</div>
+          </div>
+          <div class="sch-row">
+            <div class="sch-label">TOP5 발표</div>
+            <div class="sch-value">2025년 10월 첫째 주</div>
+          </div>
+          <div class="sch-row">
+            <div class="sch-label">최종 시상식</div>
+            <div class="sch-value">2025년 10월 31일 (SDCX DAY)</div>
+          </div>
+        </div>
+
+        <p class="sch-note">※ SDCX-DAY : Shinhan Digital Customer eXperience Day</p>
+        <p class="sch-note">※ 일정은 내부 사정에 따라 변동될 수 있으며, 별도 공지 예정</p>
+
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq" id="faq">
+      <div class="container">
+        <h2 class="sec-title">자주 묻는 질문</h2>
+
+        <details class="acc">
+          <summary class="acc-sum">팀을 중복해서 지원해도 되나요?<br>한 팀이 여러 아이디어 접수하는 것도 되나요?</summary>
+          <div class="acc-d">네! <b>아이디어만 다르시다면, 한명이 여러팀에 중복해서 참여하여 접수하는 것은 가능합니다.</b><br> 다만 자신의 아이디어가 여러개 선발되었다면, 어떤 아이디어로 사업고도화에 참여할지 결정해야 합니다.</div>
+        </details>
+        <details class="acc">
+          <summary class="acc-sum">1차심사는 어떻게 진행되나요?</summary>
+          <div class="acc-d">서면심사로 진행됩니다. 심사위원들은 고객중심, 실현가능성, 창의성 등의 관점에서 심사를 진행해 TOP5를 선발합니다.</div>
+        </details>
+        <details class="acc">
+          <summary class="acc-sum">사업고도화 프로그램이 무엇인가요?</summary>
+          <div class="acc-d">외부 전문 AC 업체가 주관하는 비대면 컨설팅 프로그램입니다.<br>고객 조사, 아이디어 고도화, 서비스 설계 등을 진행하며, 이를 바탕으로 사업추진기획서를 만들어 내게 됩니다.<br>영업점과 부서에 부담을 드리지 않기 위해, JOB-OFF 없이 진행됩니다.</div>
+        </details>
+        <details class="acc">
+          <summary class="acc-sum">최종순위는 어떻게 정해지나요?</summary>
+          <div class="acc-d">사업고도화 프로그램을 통해 나온 기획서 산출물을 기준으로 서면심사가 진행됩니다.<br>해당 심사결과를 기준으로 순위가 정해질 예정입니다.</div>
+        </details>
+        <details class="acc">
+          <summary class="acc-sum">접수번호를 분실했습니다</summary>
+          <div class="acc-d">유니커즈 스윙메일로 문의부탁드립니다.</div>
+        </details>
+      </div>
+    </section>
+
+  </div>
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container">
+        <p class="brand">2025 UNIQUERS</p>
+        <p class="contact">문의 : uniquers@shinhan.com</p>
+    </div>
+  </footer>
+    
+  <button id="backToTop" aria-label="상단으로 이동" title="상단으로 이동">
+    <!-- 간단한 화살표 아이콘 -->
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 19V5"></path>
+        <path d="M5 12l7-7 7 7"></path>
+    </svg>
+    </button>
+  <script>
+    // 내부 스크롤 부드럽게
+    document.querySelectorAll('#shb-index a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id=a.getAttribute('href');
+        if(id.length>1 && document.querySelector(id)){
+          e.preventDefault();
+          document.querySelector(id).scrollIntoView({behavior:'smooth',block:'start'});
+          history.replaceState(null,'',id);
+        }
+      });
+    });
+  </script>
+  <script>
+  (function(){
+    const btn = document.getElementById('backToTop');
+    if (!btn) return;
+
+    // 언제 보일지 기준(px)
+    const SHOW_AT = 360;
+
+    // 스크롤 시 토글
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      window.requestAnimationFrame(() => {
+        (window.scrollY || document.documentElement.scrollTop) > SHOW_AT
+          ? btn.classList.add('is-visible')
+          : btn.classList.remove('is-visible');
+        ticking = false;
+      });
+      ticking = true;
+    }, { passive: true });
+
+    // 클릭 시 상단으로 부드럽게
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
+    });
+  })();
+</script>
+</body>
+</html>
