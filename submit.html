@@ -373,7 +373,7 @@
 
 <script>
   // ======= GAS 웹앱 URL =======
-  const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyYZezthoRWCDFeh8GPd8I630PSVRe1gZ8-XXIKR6wjCbM8aQDzluEKsaXAdRfcP_Ld/exec';
+  const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyKwj29LI-8TJsASUDNA3AK5_a75-ey8lMohmaUASrzbjuapWeGTwmRnoTtD0-BpBMa/exec';
 
   // 유틸
   const val = id => (document.getElementById(id)?.value || '').trim();
@@ -417,7 +417,7 @@
     overlay.style.display = 'block';
     successModal.style.display = 'grid';
   };
-  const closeSuccess = () => { successModal.style.display = 'none'; overlay.style.display = 'none'; };
+  const closeSuccess = () => { successModal.style.display = 'none'; overlay.style.display = 'none';  window.location.href = '/uniquers/';}   // ✅ 홈 이동};
   document.getElementById('smClose').addEventListener('click', closeSuccess);
   document.getElementById('smCopy').addEventListener('click', async (e) => {
     const code = document.getElementById('smCode').textContent.trim();
