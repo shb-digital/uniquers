@@ -399,7 +399,7 @@
   const successModal = document.getElementById('successModal');
 
   const openConfirm = (cat, emp, title) => {
-    document.getElementById('cfCat').textContent = cat || '신사업제휴';
+    document.getElementById('cfCat').textContent = cat || '-';
     document.getElementById('cfEmp').textContent = emp || '-';
     document.getElementById('cfTitle').textContent = title || '-';
     overlay.style.display = 'block';
@@ -417,7 +417,7 @@
     overlay.style.display = 'block';
     successModal.style.display = 'grid';
   };
-  const closeSuccess = () => { successModal.style.display = 'none'; overlay.style.display = 'none';  window.location.href = '/uniquers/';}   // ✅ 홈 이동};
+  const closeSuccess = () => { successModal.style.display = 'none'; overlay.style.display = 'none';};
   document.getElementById('smClose').addEventListener('click', closeSuccess);
   document.getElementById('smCopy').addEventListener('click', async (e) => {
     const code = document.getElementById('smCode').textContent.trim();
