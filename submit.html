@@ -235,7 +235,7 @@
         <div doz_type="row" doz_grid="12" class="doz_row">
           <div doz_type="grid" doz_grid="12" class="col-dz col-dz-12">
             <h2 style="text-align:center;font-size:36px;color:#0046ff;margin-bottom:20px;font-weight:bold;">접수 양식</h2>
-            <p style="text-align:center;font-size:16px;color:#666;margin-bottom:40px;"><b>로그인 없이 작성 및 제출 가능합니다!</b><br>아래 양식에 따라 아이디어를 작성해주세요</p>
+            <p style="text-align:center;font-size:16px;color:#666;margin-bottom:40px;"><b>⚠️ 임시저장이 지원되지 않으니, 내용을 다른 곳에 미리 작성 후 붙여넣기를 권장드립니다.</b></p>
           </div>
         </div>
 
@@ -329,7 +329,7 @@
     <footer class="site-footer" style="text-align:center !important;">
         <div style=" max-width:1200px;  margin:0 auto;  text-align:center;  line-height:1.6;">
             <p style="  margin:0;  font-weight:700;  color:#0b1220; text-align:center !important;">2025 UNIQUERS</p>
-            <p class="contact">문의 : uniquers@shinhan.com</p>
+            <p class="contact">문의 : 디지털솔루션부 정혜민 팀장 | uniquers@shinhan.com</p>
         </div>
     </footer>
   <!-- ===== Modals / Scripts (변경 없음) ===== -->
@@ -373,7 +373,7 @@
 
 <script>
   // ======= GAS 웹앱 URL =======
-  const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwt60ALLvczJfWJtl8Dn3JLWNdxjTAYXYcPZMo6x31vWrwygUGTeP4dZBETBXe_DF9s/exec';
+  const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyYZezthoRWCDFeh8GPd8I630PSVRe1gZ8-XXIKR6wjCbM8aQDzluEKsaXAdRfcP_Ld/exec';
 
   // 유틸
   const val = id => (document.getElementById(id)?.value || '').trim();
@@ -520,12 +520,21 @@
     await submitToGAS();
   });
 </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2N53L5722Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-            
+  gtag('config', 'G-2N53L5722Q');
+</script>            
 <!-- Apps Script(백엔드)는 기존과 동일 사용 -->
 </body>
 
 </html>
+
+
 
 
 
