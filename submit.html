@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="footer-style.css">  
-  <link rel="apple-touch-icon" href="favicon.png"> <!-- iOS 홈화면용 -->
+  <link rel="apple-touch-icon" href="favicon.png">
   <link rel="shortcut icon" href="favicon.png" type="image/png">
-    <!-- Pretendard Variable CDN -->
+  <!-- Pretendard Variable CDN -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
 
@@ -20,14 +20,17 @@
     }
     html,body{margin:0}
     body {
-        margin: 0;
-        font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
-        font-size: 15px;
-        line-height: 1.65;
-        color: var(--text);
-    } 
-    main{padding-top:8px}                  /* 고정 헤더 보정 */
-    :target{scroll-margin-top:var(--header-h)} /* 앵커 이동 보정 */
+      margin: 0;
+      font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text);
+      background:#f8f9fa;
+    }
+    body.loading{ overflow:hidden; }
+
+    main{padding-top:8px}
+    :target{scroll-margin-top:var(--header-h)}
 
     /* ✅ 본문 컨테이너: 좌우 여백 + 최대너비 */
     [doz_type="inside"]{
@@ -39,7 +42,7 @@
       [doz_type="inside"]{ padding:0 16px; }
     }
 
-    /* ✅ 12-그리드: PC 두 칼럼 / 모바일 스택 */
+    /* ✅ 12-그리드 */
     .doz_row{
       display:grid;
       grid-template-columns:repeat(12, minmax(0,1fr));
@@ -47,19 +50,18 @@
       align-items:start;
     }
     .col-dz-12{ grid-column:span 12; }
-    .col-dz-6{ grid-column:span 6; }  /* 팀장/팀원 */
+    .col-dz-6{ grid-column:span 6; }
     @media (max-width:900px){
-      .col-dz-6{ grid-column:span 12; } /* 모바일에서 줄바꿈 */
+      .col-dz-6{ grid-column:span 12; }
     }
 
-    /* 섹션 수직 간격 (답답함 완화) */
     .section_wrap main{ padding:32px 0; }
     @media (max-width:900px){ .section_wrap main{ padding:24px 0; } }
 
     .il-field{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
     .il-label{font-weight:800;color:#333}
     .il-help{font-size:12px;color:#888}
-    .il-input,.il-select,.il-textarea{appearance:none;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit}
+    .il-input,.il-select,.il-textarea{appearance:none;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;background:#fff}
     .il-textarea{min-height:320px;resize:vertical}
     .il-input:focus,.il-select:focus,.il-textarea:focus{outline:none;border-color:#9fb0ce;box-shadow:0 0 0 6px var(--ring)}
     .il-btn{border:1px solid var(--line);background:var(--primary);color:#fff;border-radius:12px;padding:12px 18px;font-weight:800;cursor:pointer}
@@ -69,8 +71,8 @@
     @media (max-width:900px){.il-grid2,.il-grid3{grid-template-columns:1fr}}
     .il-note{font-size:12px;color:#888}
 
-    .overlay{position:fixed;inset:0;background:rgba(8,14,30,.45);display:none;backdrop-filter:blur(6px)}
-    .modal{position:fixed;inset:0;display:none;place-items:center;padding:20px}
+    .overlay{position:fixed;inset:0;background:rgba(8,14,30,.45);display:none;backdrop-filter:blur(6px);z-index:999}
+    .modal{position:fixed;inset:0;display:none;place-items:center;padding:20px;z-index:1000}
     .dialog{width:min(560px,100%);background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,.12)}
     .dialog .bd{padding:22px 22px 18px}
     .dialog .ft{display:flex;gap:8px;justify-content:flex-end;padding:0 22px 22px}
@@ -89,7 +91,6 @@
     @keyframes btnShimmer{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
 
     /* Confirm Modal */
-    #confirmModal{display:none;place-items:center;padding:20px}
     #confirmModal .dialog{width:min(520px,92%);border-radius:24px;border:1px solid #e8edf5;box-shadow:0 24px 60px rgba(12,18,31,.18);overflow:hidden}
     #confirmModal .bd{padding:28px 28px 18px}
     #confirmModal h3{margin:0 0 6px;font-size:20px;line-height:1.35;letter-spacing:-.02em;color:#0b1220;text-align:center;font-weight:800}
@@ -104,7 +105,6 @@
     #confirmModal .ft .il-btn{border-radius:12px;padding:12px 18px}
 
     /* Success Modal */
-    #successModal{display:none;place-items:center;padding:20px}
     #successModal .dialog{width:min(520px,92%);border-radius:24px;border:1px solid #e8edf5;box-shadow:0 24px 60px rgba(12,18,31,.18);overflow:hidden}
     #successModal .bd{padding:28px 28px 18px;text-align:center}
     #successModal h3{margin:0 0 6px;font-size:20px;letter-spacing:-.02em;color:#0b1220;font-weight:800}
@@ -115,7 +115,7 @@
     #successModal .ft #smClose{min-width:200px;padding:14px 28px;font-size:16px}
     @media (max-width:480px){ #successModal .ft #smClose{width:100%} }
 
-    /* ====== Header ====== */
+    /* ===== Header ===== */
     .site-header,*{box-sizing:border-box}
     .site-header{
       position:sticky; top:0; z-index:1000;
@@ -156,47 +156,23 @@
     @media (prefers-reduced-motion:reduce){ .site-header{backdrop-filter:none; -webkit-backdrop-filter:none} }
     .drawer { z-index: 1001; }
     .site-header { z-index: 1000; }
+
+    /* ===== Screen-Lock Busy Overlay (제출 중) ===== */
+    .busy{position:fixed;inset:0;display:none;place-items:center;z-index:2147483647;background:rgba(8,14,30,.55);backdrop-filter:blur(8px)}
+    .busy .panel{
+      background:#0b1220;border:1px solid rgba(255,255,255,.08);color:#fff;
+      border-radius:16px;padding:18px 20px;box-shadow:0 24px 60px rgba(0,0,0,.35);
+      display:flex;align-items:center;gap:12px;min-width:240px;justify-content:center
+    }
+    .spinner{width:22px;height:22px;border-radius:50%;border:3px solid rgba(255,255,255,.25);border-top-color:#fff;animation:spin .8s linear infinite;flex:none}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .busy .txt{font-weight:800;letter-spacing:.02em}
+
+    /* footer */
+    .site-footer{background:#fff;border-top:1px solid #e6e9ef;padding:20px 0;margin-top:24px}
+    .site-footer .contact{margin:6px 0 0;color:#6b7280}
   </style>
 </head>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('menuBtn');
-    const drawer = document.getElementById('mobileMenu');
-    if (!btn || !drawer) return;
-
-    function open() {
-      drawer.hidden = false;
-      drawer.style.display = 'block';
-      btn.setAttribute('aria-expanded', 'true');
-      btn.setAttribute('aria-label', '메뉴 닫기');
-      // 바깥 클릭/ESC로 닫기
-      document.addEventListener('click', outside, { capture: true });
-      document.addEventListener('keydown', esc);
-    }
-
-    function close() {
-      drawer.style.display = 'none';
-      drawer.hidden = true;
-      btn.setAttribute('aria-expanded', 'false');
-      btn.setAttribute('aria-label', '메뉴 열기');
-      document.removeEventListener('click', outside, { capture: true });
-      document.removeEventListener('keydown', esc);
-    }
-
-    function outside(e) {
-      if (!drawer.contains(e.target) && !btn.contains(e.target)) close();
-    }
-    function esc(e) {
-      if (e.key === 'Escape') close();
-    }
-
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-      expanded ? close() : open();
-    });
-  });
-</script>
 <body>
   <!-- ===== Header ===== -->
   <header class="site-header" role="banner">
@@ -206,7 +182,7 @@
       <nav aria-label="Primary">
         <ul class="nav-list">
           <li><a href="/uniquers/">홈</a></li>
-          <li><a href="/uniquers/submit.html">아이디어 접수</a></li>
+          <li><a href="/uniquers/submit.html" class="active">아이디어 접수</a></li>
           <li><a href="/uniquers/inquiry.html">아이디어 조회</a></li>
         </ul>
       </nav>
@@ -221,7 +197,7 @@
     <nav class="drawer" id="mobileMenu" hidden aria-label="Mobile">
       <ul style="list-style:none;margin:0;padding:0">
         <li><a href="/uniquers/">홈</a></li>
-        <li><a href="/uniquers/submit.html">아이디어 접수</a></li>
+        <li><a href="/uniquers/submit.html" class="active">아이디어 접수</a></li>
         <li><a href="/uniquers/inquiry.html">아이디어 조회</a></li>
       </ul>
     </nav>
@@ -239,7 +215,7 @@
           </div>
         </div>
 
-        <!-- 팀장 / 팀원 (PC: 6+6 / Mobile: 12) -->
+        <!-- 팀장 / 팀원 -->
         <div doz_type="row" doz_grid="12" class="doz_row">
           <div doz_type="grid" doz_grid="6" class="col-dz col-dz-6">
             <div style="background:#ffffff;padding:30px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.08);margin-bottom:20px;">
@@ -293,17 +269,17 @@
                 </div>
                 <div class="il-field">
                   <label class="il-label" for="bg">제안 배경<span style="color:#0046ff"> *</span></label>
-                  <textarea class="il-textarea" id="bg"  minlength="100" maxlength="2000" placeholder="배경과 필요성 (최대 2000자)" required></textarea>
+                  <textarea class="il-textarea" id="bg" minlength="100" maxlength="2000" placeholder="배경과 필요성 (최대 2000자)" required></textarea>
                   <div class="il-help" id="ctrBg">0 / 2000</div>
                 </div>
                 <div class="il-field">
                   <label class="il-label" for="detail">아이디어 상세내용<span style="color:#0046ff"> *</span></label>
-                  <textarea class="il-textarea" id="detail" minlength="100" maxlength="2000" placeholder="구체 내용과 실행 방안 (최대 2000자)" required></textarea>
+                  <textarea class="il-textarea" id="detail" minlength="100" maxlength="2000" placeholder="구체적인 내용과 실행방안 (최대 2000자)" required></textarea>
                   <div class="il-help" id="ctrDetail">0 / 2000</div>
                 </div>
                 <div class="il-field">
                   <label class="il-label" for="impact">기대효과<span style="color:#0046ff"> *</span></label>
-                  <textarea class="il-textarea" id="impact"  minlength="100" maxlength="2000" placeholder="예상 효과와 성과 (최대 2000자)" required></textarea>
+                  <textarea class="il-textarea" id="impact" minlength="100" maxlength="2000" placeholder="기대효과와 성과 (최대 2000자)" required></textarea>
                   <div class="il-help" id="ctrImpact">0 / 2000</div>
                 </div>
               </div>
@@ -316,26 +292,25 @@
           </div>
         </div>
 
-        <!-- 여백 -->
         <div doz_type="row" doz_grid="12" class="doz_row">
           <div class="col-dz col-dz-12" style="height:10px"></div>
         </div>
       </div>
     </main>
-    
   </div>
 
-      <!-- ===== Footer ===== -->
-    <footer class="site-footer" style="text-align:center !important;">
-        <div style=" max-width:1200px;  margin:0 auto;  text-align:center;  line-height:1.6;">
-            <p style="  margin:0;  font-weight:700;  color:#0b1220; text-align:center !important;">2025 UNIQUERS</p>
-            <p class="contact">문의 : 디지털솔루션부 정혜민 팀장 | uniquers@shinhan.com</p>
-        </div>
-    </footer>
-  <!-- ===== Modals / Scripts (변경 없음) ===== -->
-  <div class="overlay" id="overlay"></div>
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer" style="text-align:center !important;">
+    <div style="max-width:1200px;margin:0 auto;text-align:center;line-height:1.6;">
+      <p style="margin:0;font-weight:700;color:#0b1220;text-align:center !important;">2025 UNIQUERS</p>
+      <p class="contact">문의 : 디지털솔루션부 정혜민 팀장 | uniquers@shinhan.com</p>
+    </div>
+  </footer>
 
-  <div class="modal" id="confirmModal">
+  <!-- ===== Modals / Overlays ===== -->
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <div class="modal" id="confirmModal" aria-hidden="true">
     <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
       <div class="bd">
         <h3 id="confirmTitle">제출 전 확인</h3>
@@ -354,187 +329,251 @@
     </div>
   </div>
 
-  <!-- Success Modal (예쁘게) -->
-<div class="modal" id="successModal">
-  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="smTitle">
-    <div class="bd">
-      <h3 id="smTitle">제출이 완료되었습니다 🎉</h3>
-      <p class="sub">아래 <b>접수번호 6자리</b>를 안전한 곳에 보관해 주세요.</p>
-      <div class="sm-code" id="smCode" aria-live="polite">- - - - - -</div>
-      <div class="sm-actions">
-        <button class="il-btn " id="smCopy">코드 복사</button>
-        <button class="il-btn secondary" id="smClose">닫기</button>
-        <a id="smDocLink" class="il-btn secondary sm-link" target="_blank" rel="noopener">문서 열기</a>
+  <div class="modal" id="successModal" aria-hidden="true">
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="smTitle">
+      <div class="bd">
+        <h3 id="smTitle">제출이 완료되었습니다 🎉</h3>
+        <p class="sub">아래 <b>접수번호 6자리</b>를 안전한 곳에 보관해 주세요.</p>
+        <div class="sm-code" id="smCode" aria-live="polite">- - - - - -</div>
+        <div class="sm-actions">
+          <button class="il-btn" id="smCopy">코드 복사</button>
+          <button class="il-btn secondary" id="smClose">닫기</button>
+          <a id="smDocLink" class="il-btn secondary sm-link" target="_blank" rel="noopener">문서 열기</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
+  <!-- 화면 잠금 Busy Overlay (제출 중) -->
+  <div class="busy" id="busy" aria-hidden="true">
+    <div class="panel" role="status" aria-live="polite">
+      <div class="spinner" aria-hidden="true"></div>
+      <div class="txt">제출 중…</div>
+    </div>
+  </div>
 
-<script>
-  // ======= GAS 웹앱 URL =======
-  const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyYZezthoRWCDFeh8GPd8I630PSVRe1gZ8-XXIKR6wjCbM8aQDzluEKsaXAdRfcP_Ld/exec';
+  <!-- ===== Scripts (모든 요소 뒤에서 실행) ===== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // ======= GAS 웹앱 URL =======
+      const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbz49m8AyOOWc_UleJkd99AWLNGhGVH9kTuXZYumaMMVvZzXFeFgQR8fQK96pWoET-fI/exec';
 
-  // 유틸
-  const val = id => (document.getElementById(id)?.value || '').trim();
-  const setCounter = (id, ctrId) => {
-    const el = document.getElementById(id), ctr = document.getElementById(ctrId);
-    if (!el || !ctr) return;
-    const update = () => ctr.textContent = `${el.value.length} / ${el.maxLength}`;
-    el.addEventListener('input', update); update();
-  };
-  setCounter('bg','ctrBg'); setCounter('detail','ctrDetail'); setCounter('impact','ctrImpact');
+      // ====== 공통 엘리먼트 ======
+      const overlay = document.getElementById('overlay');
+      const confirmModal = document.getElementById('confirmModal');
+      const successModal = document.getElementById('successModal');
+      const busy = document.getElementById('busy');
 
-  // 접수번호(6자리) – 맨 앞 0 방지
-  const genCodeNoLeadingZero = (len = 6) => {
-    const first = String(Math.floor(Math.random() * 9) + 1); // 1~9
-    let rest = '';
-    for (let i = 0; i < len - 1; i++) rest += String(Math.floor(Math.random() * 10));
-    return first + rest;
-  };
+      // ====== 유틸 ======
+      const val = id => (document.getElementById(id)?.value || '').trim();
+      const setCounter = (id, ctrId) => {
+        const el = document.getElementById(id), ctr = document.getElementById(ctrId);
+        if (!el || !ctr) return;
+        const update = () => ctr.textContent = `${el.value.length} / ${el.maxLength}`;
+        el.addEventListener('input', update); update();
+      };
+      setCounter('bg','ctrBg'); setCounter('detail','ctrDetail'); setCounter('impact','ctrImpact');
 
-  // ===== 확인 모달 =====
-  const overlay = document.getElementById('overlay');
-  const confirmModal = document.getElementById('confirmModal');
-  const successModal = document.getElementById('successModal');
+      const genCodeNoLeadingZero = (len = 6) => {
+        const first = String(Math.floor(Math.random() * 9) + 1); // 1~9
+        let rest = '';
+        for (let i = 0; i < len - 1; i++) rest += String(Math.floor(Math.random() * 10));
+        return first + rest;
+      };
 
-  const openConfirm = (cat, emp, title) => {
-    document.getElementById('cfCat').textContent = cat || '신사업제휴';
-    document.getElementById('cfEmp').textContent = emp || '-';
-    document.getElementById('cfTitle').textContent = title || '-';
-    overlay.style.display = 'block';
-    confirmModal.style.display = 'grid';
-  };
-  const closeConfirm = () => { confirmModal.style.display = 'none'; overlay.style.display = 'none'; };
-  document.getElementById('cfCancel').addEventListener('click', closeConfirm);
+      // ===== 모바일 메뉴 =====
+      (function setupMobileMenu(){
+        const btn = document.getElementById('menuBtn');
+        const drawer = document.getElementById('mobileMenu');
+        if (!btn || !drawer) return;
 
-  // ===== 성공 모달 =====
-  const openSuccess = (code, docUrl) => {
-    document.getElementById('smCode').textContent = code || '- - - - - -';
-    const linkEl = document.getElementById('smDocLink');
-    if (docUrl) { linkEl.href = docUrl; linkEl.style.display = 'inline-flex'; }
-    else { linkEl.removeAttribute('href'); linkEl.style.display = 'none'; }
-    overlay.style.display = 'block';
-    successModal.style.display = 'grid';
-  };
-  const closeSuccess = () => { successModal.style.display = 'none'; overlay.style.display = 'none'; };
-  document.getElementById('smClose').addEventListener('click', closeSuccess);
-  document.getElementById('smCopy').addEventListener('click', async (e) => {
-    const code = document.getElementById('smCode').textContent.trim();
-    try { await navigator.clipboard.writeText(code); } catch(_) {
-      const ta = document.createElement('textarea'); ta.value = code; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
-    }
-    const btn = e.currentTarget; const prev = btn.textContent; btn.textContent='복사됨'; setTimeout(()=>btn.textContent=prev,1100);
-  });
-
-  // 오버레이/ESC로 닫기 (두 모달 모두)
-  overlay.addEventListener('click', () => { closeConfirm(); closeSuccess(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeConfirm(); closeSuccess(); } });
-
-  // 제출 버튼 → 확인 모달
-  document.getElementById('submitBtn').addEventListener('click', () => {
-    if (!GAS_ENDPOINT.includes('https')) { alert('먼저 GAS 웹앱 URL(GAS_ENDPOINT)을 설정하세요.'); return; }
-    const requiredIds = ['leadEmp','leadName','leadDept','title','bg','detail','impact'];
-    for (const id of requiredIds) {
-      if (!val(id)) { document.getElementById(id)?.focus(); alert('필수 입력을 확인하세요.'); return; }
-    }
-    const catEl = document.getElementById('category');
-    const cat = catEl ? (catEl.value || catEl.options[catEl.selectedIndex]?.text) : '';
-    openConfirm(cat, val('leadEmp'), val('title'));
-  });
-
-  // 실제 전송
-  async function submitToGAS(){
-    const fallbackCode = genCodeNoLeadingZero(6);
-
-    const payload = {
-      category: val('category'),
-      title: val('title'),
-      background: val('bg'),
-      details: val('detail'),
-      impact: val('impact'),
-      teamLead: { empNo: val('leadEmp'), name: val('leadName'), dept: val('leadDept'), email: val('leadEmail') },
-      teamMembers: (() => {
-        const emp = val('memberEmp'), name = val('memberName'), dept = val('memberDept'), email = val('memberEmail');
-        return (emp || name || dept || email) ? [{ empNo: emp, name, dept, email }] : [];
-      })(),
-      clientCode: fallbackCode,
-      submittedAt: new Date().toISOString(),
-      ua: navigator.userAgent
-    };
-
-    for (const k of ['background','details','impact']) {
-      if ((payload[k] || '').length > 2000) { alert('텍스트 길이 제한(2000자)을 초과했습니다.'); return; }
-    }
-    for (const k of ['background','details','impact']) {
-      if ((payload[k] || '').length < 100) { alert('최소 텍스트 길이를(100자) 작성해주세요.'); return; }
-    }
-
-    const btn = document.getElementById('submitBtn');
-    const oldText = btn.textContent;
-    btn.disabled = true; btn.textContent = '제출 중…'; btn.classList.add('is-sending');
-
-    try {
-      const res = await fetch(GAS_ENDPOINT, { method: 'POST', body: JSON.stringify(payload) });
-      const text = await res.text();
-
-      let shownCode = null, docUrl = null;
-      let ok = false, errMsg = '';
-      try {
-        const data = JSON.parse(text);
-        ok = !!data?.ok;
-        // 코드 선택 (앞 0 방지)
-        if (data?.code) {
-          shownCode = String(data.code);
-          if (/^0/.test(shownCode)) shownCode = payload.clientCode;
-        } else {
-          shownCode = payload.clientCode;
+        function open() {
+          drawer.hidden = false;
+          drawer.style.display = 'block';
+          btn.setAttribute('aria-expanded', 'true');
+          btn.setAttribute('aria-label', '메뉴 닫기');
+          document.addEventListener('click', outside, { capture: true });
+          document.addEventListener('keydown', esc);
         }
-        // 문서 링크 추정 키들
-        docUrl = data?.docUrl || data?.url || data?.link || null;
-        if (!ok) errMsg = data?.message || '제출 실패';
-      } catch { errMsg = '제출 실패 (JSON 파싱 오류)'; }
+        function close() {
+          drawer.style.display = 'none';
+          drawer.hidden = true;
+          btn.setAttribute('aria-expanded', 'false');
+          btn.setAttribute('aria-label', '메뉴 열기');
+          document.removeEventListener('click', outside, { capture: true });
+          document.removeEventListener('keydown', esc);
+        }
+        function outside(e) {
+          if (!drawer.contains(e.target) && !btn.contains(e.target)) close();
+        }
+        function esc(e) { if (e.key === 'Escape') close(); }
 
-      if (ok) {
-        // 폼 리셋
-        ['leadEmp','leadName','leadDept','leadEmail','memberEmp','memberName','memberDept','memberEmail','category','title','bg','detail','impact']
-          .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-        const sel = document.getElementById('category'); if (sel) sel.value = '신사업제휴';
-        setCounter('bg','ctrBg'); setCounter('detail','ctrDetail'); setCounter('impact','ctrImpact');
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const expanded = btn.getAttribute('aria-expanded') === 'true';
+          expanded ? close() : open();
+        });
+      })();
 
-        // 성공 모달 오픈
-        openSuccess(shownCode, docUrl);
-      } else {
-        alert(errMsg || '제출 실패');
+      // ===== 모달 열고 닫기 =====
+      const openConfirm = (cat, emp, title) => {
+        document.getElementById('cfCat').textContent = cat || '-';
+        document.getElementById('cfEmp').textContent = emp || '-';
+        document.getElementById('cfTitle').textContent = title || '-';
+        overlay.style.display = 'block';
+        confirmModal.style.display = 'grid';
+      };
+      const closeConfirm = () => { confirmModal.style.display = 'none'; overlay.style.display = 'none'; };
+      document.getElementById('cfCancel').addEventListener('click', closeConfirm);
+
+      const openSuccess = (code, docUrl) => {
+        document.getElementById('smCode').textContent = code || '- - - - - -';
+        const linkEl = document.getElementById('smDocLink');
+        if (docUrl) { linkEl.href = docUrl; linkEl.style.display = 'inline-flex'; }
+        else { linkEl.removeAttribute('href'); linkEl.style.display = 'none'; }
+        overlay.style.display = 'block';
+        successModal.style.display = 'grid';
+      };
+      const closeSuccess = () => { successModal.style.display = 'none'; overlay.style.display = 'none';};
+      document.getElementById('smClose').addEventListener('click', closeSuccess);
+      document.getElementById('smCopy').addEventListener('click', async (e) => {
+        const code = document.getElementById('smCode').textContent.trim();
+        try { await navigator.clipboard.writeText(code); }
+        catch(_) {
+          const ta = document.createElement('textarea'); ta.value = code; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+        }
+        const btn = e.currentTarget; const prev = btn.textContent; btn.textContent='복사됨'; setTimeout(()=>btn.textContent=prev,1100);
+      });
+
+      // 오버레이/ESC로 닫기
+      overlay.addEventListener('click', () => { closeConfirm(); closeSuccess(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeConfirm(); closeSuccess(); } });
+
+      // ===== Busy Overlay 제어 =====
+      let busyTimer = null;
+      function setLoading(on){
+        if(on){
+          document.body.classList.add('loading');
+          busy.style.display = 'grid';
+          clearTimeout(busyTimer);
+          busyTimer = setTimeout(()=>{ setLoading(false); alert('응답이 지연됩니다. 잠시 후 다시 시도해 주세요.'); }, 20000);
+        }else{
+          document.body.classList.remove('loading');
+          busy.style.display = 'none';
+          clearTimeout(busyTimer);
+        }
       }
-    } catch(e){
-      alert('네트워크/권한 오류: ' + e);
-    } finally {
-      btn.disabled = false; btn.textContent = oldText; btn.classList.remove('is-sending');
-    }
-  }
 
-  document.getElementById('cfOk').addEventListener('click', async () => { 
-    // 확인 모달 닫고 실제 제출
-    confirmModal.style.display = 'none';
-    await submitToGAS();
-  });
-</script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2N53L5722Q"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+      // ===== 실제 전송 =====
+      async function submitToGAS(){
+        const fallbackCode = genCodeNoLeadingZero(6);
 
-  gtag('config', 'G-2N53L5722Q');
-</script>            
-<!-- Apps Script(백엔드)는 기존과 동일 사용 -->
+        const payload = {
+          category: val('category'),
+          title: val('title'),
+          background: val('bg'),
+          details: val('detail'),
+          impact: val('impact'),
+          teamLead: { empNo: val('leadEmp'), name: val('leadName'), dept: val('leadDept'), email: val('leadEmail') },
+          teamMembers: (() => {
+            const emp = val('memberEmp'), name = val('memberName'), dept = val('memberDept'), email = val('memberEmail');
+            return (emp || name || dept || email) ? [{ empNo: emp, name, dept, email }] : [];
+          })(),
+          clientCode: fallbackCode,
+          submittedAt: new Date().toISOString(),
+          ua: navigator.userAgent
+        };
+
+        for (const k of ['background','details','impact']) {
+          if ((payload[k] || '').length > 2000) { alert('텍스트 길이 제한(2000자)을 초과했습니다.'); return; }
+          if ((payload[k] || '').length < 100) { alert('최소 텍스트 길이를(100자) 작성해주세요.'); return; }
+        }
+
+        const btn = document.getElementById('submitBtn');
+        const oldText = btn.textContent;
+        btn.disabled = true; btn.textContent = '제출 중…'; btn.classList.add('is-sending');
+
+        setLoading(true);
+
+        try {
+
+          const res = await fetch(GAS_ENDPOINT, { method: 'POST', body: JSON.stringify(payload) });
+          const text = await res.text();
+
+          let shownCode = null, docUrl = null;
+          let ok = false, errMsg = '';
+
+          try {
+            const data = JSON.parse(text);
+            ok = !!data?.ok && res.ok;
+            // 코드 선택 (앞 0 방지)
+            if (data?.code) {
+              shownCode = String(data.code);
+              if (/^0/.test(shownCode)) shownCode = payload.clientCode;
+            } else {
+              shownCode = payload.clientCode;
+            }
+            // 문서 링크 추정 키들
+            docUrl = data?.docUrl || data?.url || data?.link || null;
+            if (!ok) errMsg = data?.message || `제출 실패 (HTTP ${res.status})`;
+          } catch {
+            // JSON 파싱 실패시에도 서버가 200이면 코드만 대체
+            if (res.ok) {
+              shownCode = payload.clientCode;
+              ok = true;
+            } else {
+              errMsg = `제출 실패 (응답 파싱 오류 / HTTP ${res.status})`;
+            }
+          }
+
+          if (ok) {
+            // 폼 리셋
+            ['leadEmp','leadName','leadDept','leadEmail','memberEmp','memberName','memberDept','memberEmail','title','bg','detail','impact']
+              .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+            const sel = document.getElementById('category'); if (sel) sel.value = '제휴신사업';
+            setCounter('bg','ctrBg'); setCounter('detail','ctrDetail'); setCounter('impact','ctrImpact');
+
+            openSuccess(shownCode, docUrl);
+          } else {
+            alert(errMsg || '제출 실패');
+          }
+        } catch(e){
+          alert('네트워크/권한 오류: ' + e);
+        } finally {
+          setLoading(false);
+          btn.disabled = false; btn.textContent = oldText; btn.classList.remove('is-sending');
+        }
+      }
+
+      // ===== 제출 흐름 =====
+      document.getElementById('submitBtn').addEventListener('click', () => {
+        if (!String(GAS_ENDPOINT).startsWith('https://')) {
+          alert('먼저 GAS 웹앱 URL(GAS_ENDPOINT)을 설정하세요.');
+          return;
+        }
+        const requiredIds = ['leadEmp','leadName','leadDept','title','bg','detail','impact'];
+        for (const id of requiredIds) {
+          if (!val(id)) { document.getElementById(id)?.focus(); alert('필수 입력을 확인하세요.'); return; }
+        }
+        const catEl = document.getElementById('category');
+        const cat = catEl ? (catEl.value || catEl.options[catEl.selectedIndex]?.text) : '';
+        openConfirm(cat, val('leadEmp'), val('title'));
+      });
+
+      document.getElementById('cfOk').addEventListener('click', async () => {
+        confirmModal.style.display = 'none';
+        await submitToGAS();
+      });
+    });
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N53L5722Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2N53L5722Q');
+  </script>
 </body>
-
 </html>
-
-
-
-
-
