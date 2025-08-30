@@ -496,12 +496,8 @@
         setLoading(true);
 
         try {
-          const res = await fetch(GAS_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
 
+          const res = await fetch(GAS_ENDPOINT, { method: 'POST', body: JSON.stringify(payload) });
           const text = await res.text();
 
           let shownCode = null, docUrl = null;
