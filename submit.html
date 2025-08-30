@@ -156,6 +156,17 @@
     @media (prefers-reduced-motion:reduce){ .site-header{backdrop-filter:none; -webkit-backdrop-filter:none} }
     .drawer { z-index: 1001; }
     .site-header { z-index: 1000; }
+
+    /* ===== Screen-Lock Busy Overlay (제출 중) ===== */
+    .busy{position:fixed;inset:0;display:none;place-items:center;z-index:2147483647;background:rgba(8,14,30,.55);backdrop-filter:blur(8px)}
+    .busy .panel{
+      background:#0b1220;border:1px solid rgba(255,255,255,.08);color:#fff;
+      border-radius:16px;padding:18px 20px;box-shadow:0 24px 60px rgba(0,0,0,.35);
+      display:flex;align-items:center;gap:12px;min-width:240px;justify-content:center
+    }
+    .spinner{width:22px;height:22px;border-radius:50%;border:3px solid rgba(255,255,255,.25);border-top-color:#fff;animation:spin .8s linear infinite;flex:none}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .busy .txt{font-weight:800;letter-spacing:.02em}
   </style>
 </head>
 <script>
@@ -443,6 +454,23 @@
     openConfirm(cat, val('leadEmp'), val('title'));
   });
 
+  // ===== Busy Overlay 제어 =====
+  const busy = document.getElementById('busy');
+  let busyTimer = null;
+  function setLoading(on){
+    if(on){
+      document.body.classList.add('loading');
+      busy.style.display = 'grid';
+      // 20초 타임아웃(응답 지연/오류 대비)
+      clearTimeout(busyTimer);
+      busyTimer = setTimeout(()=>{ setLoading(false); alert('응답이 지연됩니다. 잠시 후 다시 시도해 주세요.'); }, 20000);
+    }else{
+      document.body.classList.remove('loading');
+      busy.style.display = 'none';
+      clearTimeout(busyTimer);
+    }
+  }
+
   // 실제 전송
   async function submitToGAS(){
     const fallbackCode = genCodeNoLeadingZero(6);
@@ -472,7 +500,11 @@
 
     const btn = document.getElementById('submitBtn');
     const oldText = btn.textContent;
-    btn.disabled = true; btn.textContent = '제출 중…'; btn.classList.add('is-sending');
+    btn.disabled = true; btn.textContent = '제출 중…'; btn.classList.add('is-sending');  
+
+    // ✅ 화면 잠금 시작
+    setLoading(true);
+
 
     try {
       const res = await fetch(GAS_ENDPOINT, { method: 'POST', body: JSON.stringify(payload) });
@@ -510,6 +542,8 @@
     } catch(e){
       alert('네트워크/권한 오류: ' + e);
     } finally {
+      // ✅ 화면 잠금 해제
+      setLoading(false);
       btn.disabled = false; btn.textContent = oldText; btn.classList.remove('is-sending');
     }
   }
@@ -529,6 +563,13 @@
 
   gtag('config', 'G-2N53L5722Q');
 </script>            
+<!-- 화면 잠금 Busy Overlay (제출 중) -->
+<div class="busy" id="busy" aria-hidden="true">
+  <div class="panel" role="status" aria-live="polite">
+    <div class="spinner" aria-hidden="true"></div>
+    <div class="txt">제출 중…</div>
+  </div>
+</div>
 <!-- Apps Script(백엔드)는 기존과 동일 사용 -->
 </body>
 
